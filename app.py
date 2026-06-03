@@ -8,6 +8,10 @@ VERIFY_TOKEN = "mydocbot123"
 ACCESS_TOKEN = "EAAhxlj8zrn0BRsVYAgnBOlz75HqRaF5SFDZAaAZA2JZAbEwbErMT1BlrklJmQtcIpU4Kmbk7eOEkLNH2jkfpTF5pURvzO7ZCJ1gGjynzRLiK4vCZA4gcyZAZCEUm509ThP3VavV4pZAi1SBIoZAZBvRAIHja73RkfJakjWTjeZBgPBy70UR0aLyUz6YZBYz2Hdvb7WhQ6eRVZBh0oZC7zMi9dvNIll5k3KgTiZCooiJtgPF6CeZANxPfNvwMZBXM66ZBueZCZBjKZBJjkTNZA0OZBlexO5jwiatefVGvho3HwZDZD"
 PHONE_NUMBER_ID = "1191571390698057"
 
+@app.route("/")
+def home():
+    return "Bot is running", 200
+
 def send_message(to, text):
     url = f"https://graph.facebook.com/v18.0/{PHONE_NUMBER_ID}/messages"
     headers = {"Authorization": f"Bearer {ACCESS_TOKEN}", "Content-Type": "application/json"}
