@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 VERIFY_TOKEN = "mydocbot123"
-ACCESS_TOKEN = "EAAhxlj8zrn0BRrKu8YQZAuueCyqQ9AD26GZC31cRk7uspRjRRtTkBShFbEE7d5RYiGHou3kjYHR7o6Ujw2x4uZBZA6iJzkLD6FughrTuthEBVkN4CVK3ZAPu7b6RwNvHluR3RIrl5pbv7bsg3QdGQdy4gZCfKQ6VD1toUUgdNWoP4CNLhfpMgpptnXr0ApKsQZAB2p7kOnKzZCeLmLoMnBjZB0AwqJUNGDgdZAUwFRb2ONAqBDpxBOZAC7SmuAMJfQovVw1eSs7PPGH3W3mz7ZBBZAZADxlyfG"
+ACCESS_TOKEN = "EAAhxlj8zrn0BRsVYAgnBOlz75HqRaF5SFDZAaAZA2JZAbEwbErMT1BlrklJmQtcIpU4Kmbk7eOEkLNH2jkfpTF5pURvzO7ZCJ1gGjynzRLiK4vCZA4gcyZAZCEUm509ThP3VavV4pZAi1SBIoZAZBvRAIHja73RkfJakjWTjeZBgPBy70UR0aLyUz6YZBYz2Hdvb7WhQ6eRVZBh0oZC7zMi9dvNIll5k3KgTiZCooiJtgPF6CeZANxPfNvwMZBXM66ZBueZCZBjKZBJjkTNZA0OZBlexO5jwiatefVGvho3HwZDZD"
 PHONE_NUMBER_ID = "1191571390698057"
 
 def send_message(to, text):
@@ -45,13 +45,15 @@ def webhook():
         return "Invalid token", 403
 
     data = request.json
+    print("Incoming payload:", data)
     try:
         msg = data["entry"][0]["changes"][0]["value"]["messages"][0]
         phone = msg["from"]
         text = msg["text"]["body"]
+        print(f"Message from {phone}: {text}") 
         handle_message(phone, text)
-    except:
-        pass
+    except Exception as e:
+        print("Error:", e)
     return "OK"
 
 if __name__ == "__main__":  
