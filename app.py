@@ -12,12 +12,15 @@ def send_message(to, text):
     url = f"https://graph.facebook.com/v18.0/{PHONE_NUMBER_ID}/messages"
     headers = {"Authorization": f"Bearer {ACCESS_TOKEN}", "Content-Type": "application/json"}
     data = {
-    "messaging_product": "whatsapp",
-    "to": to,
-    "type": "text",
-    "text": {"body": text}
-    }
+            "messaging_product": "whatsapp",
+            "to": to,
+            "type": "text",
+            "text": {"body": text}
+            }
     requests.post(url, headers=headers, json=data)
+
+# Track which service each user selected
+user_state = {}
 
 def handle_message(phone, text):
     text = text.strip().upper()
@@ -39,7 +42,7 @@ def webhook():
         challenge = request.args.get("hub.challenge")
         if token == VERIFY_TOKEN:
             return challenge
-    return "Invalid token", 403
+        return "Invalid token", 403
 
     data = request.json
     try:
